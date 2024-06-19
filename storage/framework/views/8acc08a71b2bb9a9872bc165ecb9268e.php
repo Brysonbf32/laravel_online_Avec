@@ -6,7 +6,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('include.Sidebars');
 
-$__html = app('livewire')->mount($__name, $__params, 'GI3CFiY', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'HKuHpmU', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -25,7 +25,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('include.navbar');
 
-$__html = app('livewire')->mount($__name, $__params, 'Oskvzml', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'PUn6foG', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -188,7 +188,27 @@ if (isset($__slots)) unset($__slots);
                                 title: "<?php echo e(session('success')); ?>",
                               })
                           </script>
-                        <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->      
+                        <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->  
+                        <!--[if BLOCK]><![endif]--><?php if(session('delete')): ?>
+                        <script>
+                          const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-right',
+                            iconColor: 'white',
+                            customClass: {
+                              popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timer: 2400,
+                            timerProgressBar: true,
+                          })
+
+                             Toast.fire({
+                              icon: 'delete',
+                              title: "<?php echo e(session('delete')); ?>",
+                            })
+                        </script>
+                      <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->     
                         <div class=' bg-white rounded'>
                           <table class=' w-full '>
                             <thead class=''>
@@ -204,23 +224,88 @@ if (isset($__slots)) unset($__slots);
                             </thead>
                             <tbody>
                                 <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $getgestionnaire; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gestions): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>    
-                                    <tr class='hover:bg-slate-50 border-t h-5 border-slate-200'>                    
+                                    <tr class='hover:bg-slate-50 border-t px-2 h-5 border-slate-200'>                    
                                     <td>
                                       <span class='text-xs text-left font-semibold  text-[#141B27] flex justify-start gap-1 py-2'><?php echo e($gestions->nom_gest); ?></span>
                                     </td>
                                     <td class='text-xs text-left font-semibold  text-[#141B27] pb-1'>
-                                      <span class='pb-2'><?php echo e($gestions->nom_gest); ?></span>
+                                      <span class='pb-2'><?php echo e($gestions->address_gest); ?></span>
                                     </td>
                                     <td class='text-xs text-left font-semibold  text-[#141B27] pb-1'>
-                                      <span class='pb-2 text-center'><?php echo e($gestions->address_gest); ?> $</span>
+                                      <span class='pb-2 text-center'><?php echo e($gestions->telephone_gest); ?></span>
                                     </td>
                                     <td class='text-xs text-left font-semibold  text-[#141B27] pb-1'>
-                                      <span class='pb-2'><?php echo e($gestions->telephone_gest); ?></span>
+                                      <span class='pb-2'><?php echo e($gestions->identite_gest); ?></span>
                                     </td>
                                     <td class='text-xs text-right font-normal  text-[#141B27] '>
                                       <div class="flex gap-2">
-                                        <div class="w-7 h-7 rounded-full bg-slate-200 text-center fff  py-1.5  hover:bg-cyan-500 hover:text-white cursor-pointer transition ease-in-out duration-500">
-                                        <a href="#" wire:navigate><i class="fa fa-plus"></i></a>
+                                        <div  x-data="{ update_modal: false }" class="w-7 h-7 rounded-full bg-slate-200 text-center fff  py-1.5  hover:bg-cyan-500 hover:text-white cursor-pointer transition ease-in-out duration-500">
+                                        <i class="fa fa-pencil" @click="update_modal =!update_modal"></i>
+
+                                          <div x-show="update_modal" class="fixed inset-0 overflow-y-auto z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                            <div class="flex items-end justify-center min-h-screen px-1 sm:px-1 md:px-4 text-center md:items-center sm:block sm:p-0">
+                                              <div x-cloak @click="update_modal = false" x-show="update_modal" 
+                                              x-transition:enter="transition ease-out duration-300 transform"
+                                              x-transition:enter-start="opacity-0" 
+                                              x-transition:enter-end="opacity-100"
+                                              x-transition:leave="transition ease-in duration-200 transform"
+                                              x-transition:leave-start="opacity-100" 
+                                              x-transition:leave-end="opacity-0"
+                                              class="fixed inset-0 transition-opacity bg-[#212121] bg-opacity-30" aria-hidden="true" style="backdrop-filter: blur(1px);"
+                                              ></div>
+                                              <div class="flex justify-center h-screen items-center place-content-center px-3">
+                                                  <div x-cloak x-show="update_modal" 
+                                                      x-transition:enter="transition ease-out duration-300 transform"
+                                                      x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                                                      x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                                      x-transition:leave="transition ease-in duration-200 transform"
+                                                      x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
+                                                      x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                      class="relative inline-block w-full sm:w-full md:w-[600px] 2xl:w-[600px] overflow-hidden text-left transition-all transform bg-white  rounded-lg 2xl:max-w-2xl border-2 border-gray-100">
+                                                      <div class="p-4 sm:p-4 md:p-7">
+                                                          <div class="flex justify-between pb-5">
+                                                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-4">
+                                                              <div class="text-gray-600">
+                                                                <p class="font-medium text-md">Modifier Gestionnaire</p>
+                                                              </div>
+                                                              <div class="lg:col-span-4">
+                                                                <form wire:submit="ajouterutilisateur"  method="POST" enctype="multipart/form-data">
+                                                                  <div class="">
+                                                                    <label class="text-black" for="address">Nom</label>
+                                                                    <input type="text" wire:input.debounce.2000ms="edit_name(<?php echo e($gestions->id); ?>, $event.target.value)" value="<?php echo e($gestions->nom_gest); ?>" class="h-10 border mt-1 rounded-sm text-black px-2 w-full focus:outline-none" />
+                                                                  </div>
+                                                                  <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-4">
+       
+                                                                    <div class="md:col-span-2">
+                                                                      <label class="text-black" for="address">Telephone</label>
+                                                                      <input type="text" wire:input.debounce.2000ms="edit_telephone(<?php echo e($gestions->id); ?>, $event.target.value)" value="<?php echo e($gestions->telephone_gest); ?>" class="h-10 border mt-1 rounded-sm text-black px-2 w-full focus:outline-none" />
+                                                                    </div>
+                                                                    <div class="md:col-span-2">
+                                                                      <label class="text-black" for="email">Address</label>
+                                                                      <input type="text" wire:input.debounce.2000ms="edit_adddres(<?php echo e($gestions->id); ?>, $event.target.value)" value="<?php echo e($gestions->address_gest); ?>" class="h-10 border mt-1 rounded-sm text-black px-2 w-full focus:outline-none" />
+                                                                    </div>
+                                                                    <div class="md:col-span-2">
+                                                                      <label class="text-black" for="city">Carte d'indentite</label>
+                                                                      <input type="text" wire:input.debounce.2000ms="edit_carteident(<?php echo e($gestions->id); ?>, $event.target.value)" value="<?php echo e($gestions->identite_gest); ?>" class="h-10 border mt-1 rounded-sm text-black px-2 w-full focus:outline-none" />
+                                                                    </div>
+                                                                    <div class="md:col-span-2">
+                                                                      <label class="text-black" for="city">Mot de passe</label>
+                                                                      <input type="text" wire:input.debounce.2000ms="edit_password(<?php echo e($gestions->id); ?>, $event.target.value)" value="<?php echo e($gestions->password_gest); ?>" class="h-10 border mt-1 rounded-sm text-black px-2 w-full focus:outline-none" />
+                                                                    </div>
+                                                                  </div>
+                                                                </form>
+                                                              </div>
+                                                            </div>
+                                                              <div @click="update_modal =!update_modal" class="text-xl font-medium text-black  h-10 w-10 bg-white rounded-md text-center cursor-pointer flex justify-center items-center place-content-center">
+                                                                  <i class="fa-solid fa-xmark"></i>    
+                                                              </div>
+                                                          </div>
+                                                          
+                                                      </div>                                                                                                                     
+                                                  </div>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
                                         <div wire:click="deleteuser(<?php echo e($gestions->id); ?>)" wire:confirm="Permission Deleted successfully" class="w-7 h-7 rounded-full bg-slate-200 text-center  py-1.5  hover:bg-cyan-500 hover:text-white cursor-pointer transition ease-in-out duration-500">
                                         <i class="fa fa-trash"></i>
@@ -239,18 +324,12 @@ if (isset($__slots)) unset($__slots);
                 </div>
   
                 <div class="">
-                  <!--[if BLOCK]><![endif]--><?php if($userdetaildata): ?>
+                  <!--[if BLOCK]><![endif]--><?php if($gestionnairedetaildata): ?>
                   <div class="shadow-sm bg-white rounded-md  lg:col-span-2 sm:col-span-1">
                     <div class="bg-white py-0">
                       <span class="text-sm font-semibold px-2 text-blue-400">Details</span>
                     </div>
                       <div class=" grid grid-cols-4 gap-1">
-                        <div class="pt-2">
-                          <img class='border border-slate-100 h-50 w-48 rounded-sm'  src="../img/1a.png"/>
-                          <div class="py-2 px-2">
-                            <h1 class="text-left text-blue-400 font-bold text-lg"><?php echo e($userdetaildata->user_username); ?></h1>
-                          </div>
-                        </div>
                         <div class="col-cols-2 px-2">
                           <div class="grid grid-cols-3">
                             <div class=" text-left text-[#141B27]/[0.6] font-bold text-sm pt-2">
@@ -260,21 +339,9 @@ if (isset($__slots)) unset($__slots);
                               <h1c class=" text-lg font-bold text-[#141B27]/[0.6] text-right px-8">:</h1>
                             </div>
                             <div class="text-sm text-left font-medium  text-[#141B27]/[0.6] pt-2">
-                              <h1><?php echo e($userdetaildata->user_fullname); ?></h1>
+                              <h1><?php echo e($gestionnairedetaildata->nom_gest); ?></h1>
                             </div>
                           </div>
-                          <div class="grid grid-cols-3">
-                            <div class=" text-left text-[#141B27]/[0.6] font-bold text-sm pt-2">
-                              <h1>Role</h1>
-                            </div>
-                            <div class=" pt-1">
-                              <h1c class=" text-lg font-bold text-[#141B27]/[0.6] text-right px-8">:</h1>
-                            </div>
-                            <div class="text-sm text-left font-medium  text-[#141B27]/[0.6] pt-2">
-                              <h1><?php echo e($userdetaildata->user_role); ?></h1>
-                            </div>
-                          </div>
-                          
                         </div>
                         <div class=" px-7">
                           <div class="grid grid-cols-3">
@@ -285,7 +352,7 @@ if (isset($__slots)) unset($__slots);
                               <h1c class=" text-lg font-bold text-[#141B27]/[0.6] text-right px-8">:</h1>
                             </div>
                             <div class="text-sm text-left font-medium  text-[#141B27]/[0.6] pt-2">
-                              <h1><?php echo e($userdetaildata->user_email); ?></h1>
+                              <h1><?php echo e($gestionnairedetaildata->updated_at); ?></h1>
                             </div>
                           </div>
                           <div class="grid grid-cols-3">
@@ -296,7 +363,7 @@ if (isset($__slots)) unset($__slots);
                               <h1c class=" text-lg font-bold text-[#141B27]/[0.6] text-right px-8">:</h1>
                             </div>
                             <div class="text-sm text-left font-medium  text-[#141B27]/[0.6] pt-2">
-                              <details> <h1><?php echo e($userdetaildata->user_password); ?></h1></details>
+                              <details> <h1><?php echo e($gestionnairedetaildata->password_gest); ?></h1></details>
                             
                             </div>
                           </div>

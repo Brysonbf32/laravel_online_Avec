@@ -25,4 +25,20 @@ class CountsController extends Controller
             return view('accounts.gestionnaire');
         }
     }
+    public function membre(){
+        $this->urole_session = session()->get('urole_session');
+        if(!$this->urole_session){
+            return redirect('/');
+        }else{
+            return view('accounts.membres');
+        }
+    }
+    public function gestionavec(){
+        $this->urole_session = session()->get('urole_session');
+        if(!$this->urole_session){
+            return redirect('/');
+        }else{
+            return view('accounts.gestionavec');
+        }
+    }
 }

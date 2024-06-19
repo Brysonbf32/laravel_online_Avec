@@ -37,6 +37,9 @@ Route::get('/user', [UserController::class, 'index'])->name('us');
 //ACCOUNTS
 Route::get('/accounts', [CountsController::class, 'index'])->name('ac');
 Route::get('/gestneur', [CountsController::class, 'gestionnaire'])->name('gest');
+Route::get('/membres', [CountsController::class, 'membre'])->name('mbr');
+Route::get('/attri', [CountsController::class, 'gestionavec'])->name('attr');
+
 //ACCOUNT0
 Route::get('/carnet', [CarnetController::class, 'index'])->name('car');
 

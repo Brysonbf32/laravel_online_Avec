@@ -84,7 +84,29 @@ class Index extends Component
             session()->flash('Deleteprofile', 'Profile Supprimer avec succefful');
         }
       }
- 
+      //MODIFIER 
+      public function edit_name($id,$value){
+        if($value){
+            comptes::where('id',$id)->update(['nom_avec' => $value]);
+            return $this->redirect('/accounts', navigate:true);
+        }
+      }
+      public function edit_nombremembres($id,$value){
+        comptes::where('id',$id)->update(['nombre_avec' =>$value]);
+        return $this->redirect('/accounts',navigate:true);
+      }
+      public function edit_montantmaxi($id,$value){
+        comptes::where('id',$id)->update(['montantmax_avec' =>$value]);
+        return $this->redirect('/accounts',navigate:true);
+      }
+      public function edit_cycles($id,$value){
+        comptes::where('id',$id)->update(['nombrecycle_avec' =>$value]);
+        return $this->redirect('/accounts', navigate:true);
+      }
+      public function edit_description($id,$value){
+        comptes::where('id',$id)->update(['description_avec' =>$value]);
+        return $this->redirect('/accounts',navigate:true);
+      }
     public function render()
     {
         $sessionro = $this->urole_session;

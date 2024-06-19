@@ -9,13 +9,13 @@ use Livewire\Component;
 
 class Gestionnaire extends Component
 {
-    public $identite_gest,$nom_gest,$address_gest,$telephone_gest,$password_gest;
+    public $identite_gest,$nom_gest,$address_gest,$telephone_gest,$password_gest ;
 
     public $umail_session,$urole_session;
-    public $userdetaildata,$id;
+    public $gestionnairedetaildata,$id;
 
     public function showdetailuserdata($id){
-      $this->userdetaildata = DB::table('gestionnaires')->where('id',$id)->first();
+      $this->gestionnairedetaildata = DB::table('gestionnaires')->where('id',$id)->first();
     }
     public function mount(){
       $this->umail_session = session()->get('umail_session');
@@ -25,7 +25,13 @@ class Gestionnaire extends Component
         return $this->redirect('/', navigate:true);
       }
     }
+    public function deleteuser($id){
+        $delete= gestionnaires::where('id',$id)->delete();
 
+        if($delete){
+            session()->flash('delete', 'Vous Venez de Vous Enregister avec Successs');
+        }
+    }
     public function creategestionnaire(Request $request){
         $validatedData = $this->validate([
             'nom_gest' =>'required|string',
@@ -74,14 +80,37 @@ class Gestionnaire extends Component
         //dd();
     }
 
+   //UPDATE INFO MANAGER
+    public function edit_name($id,$value){
+        gestionnaires::where('id',$id)->update(['nom_gest'=>$value]);
+        return $this->redirect('/gestneur',navigate:true);
+        session()->flash('success', 'Vous Venez de Vous Enregister avec Successs');
 
+    }
+    public function edit_adddres($id,$value){
+        gestionnaires::where('id',$id)->update(['address_gest'=>$value]);
+        return $this->redirect('/gestneur',navigate:true);
+    }
+
+    public function edit_carteident($id,$value){
+        gestionnaires::where('id',$id)->update(['identite_gest'=>$value]);
+        return $this->redirect('gestneur', navigate:true);
+    }
+    public function edit_password($id,$value){
+        gestionnaires::where('id',$id)->update(['password_gest'=>$value]);
+        return $this->redirect('/gestneur',navigate:true);
+    }
+    public function edit_telephone($id,$value){
+        gestionnaires::where('id',$id)->update(['telephone_gest'=>$value]);
+        return $this->redirect('/gestneur', navigate:true);
+    }
     public function render()
     {
         $sessionro = $this->urole_session;
         $sessiomail = $this->umail_session;
-                //dd($sessionro);
-                $gestionnaire = gestionnaires::all()->count();
-                $getgestionnaire = DB::table('gestionnaires')->get();
+            //dd($sessionro);
+            $gestionnaire = gestionnaires::all()->count();
+            $getgestionnaire = DB::table('gestionnaires')->get();
         return view('livewire.counts.gestionnaire',  compact('getgestionnaire','gestionnaire','sessiomail','sessionro'));
     }
 }

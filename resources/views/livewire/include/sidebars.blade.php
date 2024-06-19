@@ -84,16 +84,7 @@
                                         id="submenu"
                                         >
                                         <h1 class="cursor-pointer p-2 text-xs text-gray-600 font-medium tracking-wide text-indigo500 hover:bg-gray-200 hover:text-black duration-300">
-                                        <a href=" {{ route('us')}}" wire:navigate>Users</a> 
-                                        </h1>
-                                        <h1 class="cursor-pointer p-2 text-xs font-medium tracking-wide text-indigo500">
-                                            <a href="#" wire:navigate>Permission</a> 
-                                        </h1>
-                                        <h1 class="cursor-pointer p-2 text-xs font-medium tracking-wide text-indigo500">
-                                            <a href="#" wire:navigate>Role</a> 
-                                        </h1>
-                                        <h1 class="cursor-pointer p-2 text-xs font-medium tracking-wide text-indigo500">
-                                        Friends
+                                        <a href=" {{ route('us')}}" wire:navigate>Gestion</a> 
                                         </h1>
                                         </div>
                                     </li>
@@ -115,18 +106,21 @@
                                         <span class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo500 bg-indigo-50 rounded-full"><i class="fa fa-arrow-circle-up"></i></span>
                                         </div>
                                         <div
-                                        class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-600 font-bold bg-blue-100 shadow-sm rounded-lg"
-                                        id="submenu_compte"
-                                        >
-                                        <h1 class="cursor-pointer p-2 text-xs text-gray-600 font-medium tracking-wide text-indigo500 hover:bg-gray-200 hover:text-black duration-300">
-                                        <a href=" {{ route('ac')}}" wire:navigate>Creation</a> 
-                                        </h1>
-                                        <h1 class="cursor-pointer p-2 text-xs font-medium tracking-wide text-indigo500">
-                                           <a href="{{ route('gest')}}" wire:navigate>Gestionnaire</a> 
-                                        </h1>
-                                        <h1 class="cursor-pointer p-2 text-xs font-medium tracking-wide text-indigo500">
-                                        Friends
-                                        </h1>
+                                            class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-600 font-bold bg-blue-100 shadow-sm rounded-lg"
+                                            id="submenu_compte"
+                                            >
+                                            <h1 class="cursor-pointer p-2 text-xs text-gray-600 font-medium tracking-wide text-indigo500 hover:bg-gray-200 hover:text-black duration-300">
+                                                <a href=" {{ route('ac')}}" wire:navigate>Creation</a> 
+                                            </h1>
+                                            <h1 class="cursor-pointer p-2 text-xs font-medium tracking-wide text-indigo500">
+                                                <a href="{{ route('gest')}}" wire:navigate>Gestionnaire</a> 
+                                            </h1>
+                                            <h1 class="cursor-pointer p-2 text-xs font-medium tracking-wide text-indigo500">
+                                                <a href="{{ route('mbr')}}" wire:navigate>Membres</a>
+                                            </h1>
+                                            <h1 class="cursor-pointer p-2 text-xs text-gray-600 font-medium tracking-wide text-indigo500 hover:bg-gray-200 hover:text-black duration-300">
+                                                <a href=" {{ route('attr')}}" wire:navigate>Responsabilite</a> 
+                                            </h1>
                                         </div>
                                     </li>
                                     @endif
